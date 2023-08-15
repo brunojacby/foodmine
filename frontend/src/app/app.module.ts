@@ -19,7 +19,7 @@ import { FoodPageComponent } from './components/pages/food-page/food-page.compon
     StarRatingComponent,
     SearchComponent,
     TagsComponent,
-    FoodPageComponent
+    FoodPageComponent,
   ],
   imports: [
     BrowserModule,
