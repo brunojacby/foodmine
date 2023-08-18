@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/partials/header/header.component';
@@ -15,7 +14,9 @@ import { NotFoundComponent } from './components/partials/not-found/not-found.com
 import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component'
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputContainerComponent } from './components/partials/input-container/input-container.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,13 +29,20 @@ import { ReactiveFormsModule } from '@angular/forms';
     CartPageComponent,
     TitleComponent,
     NotFoundComponent,
-    LoginPageComponent,    
+    LoginPageComponent,
+    InputContainerComponent,    
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule, 
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule    
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut:3000,
+      positionClass: 'toast-bottom-right',
+      newestOnTop:false
+    }),       
   ],
   providers: [],
   bootstrap: [AppComponent]
