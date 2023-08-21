@@ -13,24 +13,24 @@ export interface Food {
 }
 
 export const FoodSchema = new Schema<Food>(
-    {
+    {      
       name:   {type: String, required: true},
       price:   {type: Number, required: true},
-      tags:   {type: [String]},
-      favorite:   {type: Boolean, default: false},
+      tags:   {type: [String], required: false},
+      favorite:   {type: Boolean, required: false, default: false},
       stars:   {type: Number, required: true},
       imageUrl:   {type: String, required: true},
       origins:   {type: [String], required: true},
-      cookTime:   {type: String, required: true},
+      cookTime:   {type: String, required: true}
     },{
-        toJSON:{
+        timestamps: true,
+        toJSON: {
             virtuals: true
         },
-        toObject:{
+        toObject: {
             virtuals: true
-        },
-        timestamps: true
+        }
     }
-)
+);
 
-export const FoodModel = model<Food>('food', FoodSchema)
+export const FoodModel = model<Food>('food', FoodSchema);

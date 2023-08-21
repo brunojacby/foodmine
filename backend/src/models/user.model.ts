@@ -15,7 +15,7 @@ export const UserSchema = new Schema<User>({
     password: {type: String, required: true},
     address: {type: String, required: true},
     isAdmin: {type: Boolean, required: true}
-}, {
+},{
     timestamps: true,
     toJSON: {
         virtuals: true
