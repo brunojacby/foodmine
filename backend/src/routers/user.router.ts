@@ -21,19 +21,25 @@ router.get(
   })
 );
 
-router.post(
-  "/login",
-  asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
-    const user = await UserModel.findOne({ email, password });
+router.post("/login", asyncHandler(
+  async (req, res) => {
+    const {email, password} = req.body;
+    const user = await UserModel.findOne({email , password});
 
-    if (user /*&& (await bcrypt.compare(password, user.password))*/) {
+     if(user) {
       res.send(generateTokenReponse(user));
-    } else {
-      res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
-    }
-  })
-);
+     }
+     else{
+       const BAD_REQUEST = 400;
+       res.status(BAD_REQUEST).send("Username or password is invalid!");
+     }
+
+  }
+));
+
+router.get('/mensagem', (req, res) => {
+  res.json({ mensagem: 'Minha API está funcionando!' });
+});
 
 router.post(
   "/register",
@@ -62,17 +68,15 @@ router.post(
 );
 
 const generateTokenReponse = (user: User) => {
-  const token = jwt.sign(
-    {
+  const dadosJWT = {
       id: user.id,
       email: user.email,
-      isAdmin: user.isAdmin,
-    },
-    process.env.JWT_SECRET!,
-    {
-      expiresIn: "30d",
-    }
-  );
+      isAdmin: user.isAdmin
+  }
+
+  const chaveSecreta = 'minhaChaveSecreta'
+
+  const token = jwt.sign(dadosJWT, chaveSecreta);
 
   return {
     id: user.id,
