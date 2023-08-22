@@ -16,7 +16,6 @@ app.use(cors({
 }));
 
 app.use("/api/foods", foodRouter);
-
 app.use("/api/users", userRouter);
 
 

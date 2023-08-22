@@ -46,7 +46,7 @@ export class RegisterPageComponent implements OnInit {
     if(this.registerForm.invalid) return;
 
     const fv= this.registerForm.value;
-    const user:IUserRegister = {
+    const user :IUserRegister = {
       name: fv.name,
       email: fv.email,
       password: fv.password,
