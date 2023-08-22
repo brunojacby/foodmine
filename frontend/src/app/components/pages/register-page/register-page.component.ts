@@ -41,7 +41,7 @@ export class RegisterPageComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  submit(){
+  submit(){    
     this.isSubmitted = true;
     if(this.registerForm.invalid) return;
 
@@ -54,9 +54,9 @@ export class RegisterPageComponent implements OnInit {
       address: fv.address
     };
 
-    /*this.userService.register(user).subscribe(_ => {
+    this.userService.register(user).subscribe(_ => {      
       this.router.navigateByUrl(this.returnUrl);
-    })*/
+    })
   }
 
 }

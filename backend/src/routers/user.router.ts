@@ -23,23 +23,20 @@ router.get(
 
 router.post("/login", asyncHandler(
   async (req, res) => {
-    const {email, password} = req.body;
-    const user = await UserModel.findOne({email , password});
+    const {email, password} = req.body;   
 
-     if(user) {
+    const user = await UserModel.findOne({email});    
+
+     if(user && (await bcrypt.compare(password, user.password))) {
       res.send(generateTokenReponse(user));
      }
      else{
        const BAD_REQUEST = 400;
        res.status(BAD_REQUEST).send("Username or password is invalid!");
      }
-
   }
 ));
 
-router.get('/mensagem', (req, res) => {
-  res.json({ mensagem: 'Minha API está funcionando!' });
-});
 
 router.post(
   "/register",
@@ -49,37 +46,38 @@ router.post(
     if (user) {
       res.status(HTTP_BAD_REQUEST).send("User is already exist, please login!");
       return;
+    } else {
+      const encryptedPassword = await bcrypt.hash(password, 10);
+  
+      const newUser: User = {
+        //id: '',
+        name,
+        email: email.toLowerCase(),
+        password: encryptedPassword,
+        address,
+        isAdmin: false,
+      };
+      const dbUser = await UserModel.create(newUser);
+
+      res.send(generateTokenReponse(dbUser));
     }
-
-    const encryptedPassword = await bcrypt.hash(password, 10);
-
-    const newUser: User = {
-      id: "",
-      name,
-      email: email.toLowerCase(),
-      password: encryptedPassword,
-      address,
-      isAdmin: false,
-    };
-
-    const dbUser = await UserModel.create(newUser);
-    res.send(generateTokenReponse(dbUser));
+    
   })
 );
 
 const generateTokenReponse = (user: User) => {
-  const dadosJWT = {
-      id: user.id,
+  const dadosJWT = {    
+      name: user.name, //id: ""
       email: user.email,
       isAdmin: user.isAdmin
   }
 
-  const chaveSecreta = 'minhaChaveSecreta'
+  const chaveSecreta = process.env.JWT_SECRET!
 
   const token = jwt.sign(dadosJWT, chaveSecreta);
 
   return {
-    id: user.id,
+    //id: user.id,
     email: user.email,
     name: user.name,
     address: user.address,
