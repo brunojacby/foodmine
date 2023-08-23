@@ -25,6 +25,7 @@ import { LoadingComponent } from './components/partials/loading/loading.componen
 import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
 import { CheckoutPageComponent } from './components/pages/checkout-page/checkout-page.component';
 import { OrderItemsListComponent } from './components/partials/order-items-list/order-items-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,10 +55,10 @@ import { OrderItemsListComponent } from './components/partials/order-items-list/
     HttpClientModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
-      timeOut:3000,
-      positionClass: 'toast-bottom-left',
-      newestOnTop:false
-    }),       
+      timeOut:2000,
+      positionClass: 'toast-top-right',
+      newestOnTop:true
+    }),          
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true}

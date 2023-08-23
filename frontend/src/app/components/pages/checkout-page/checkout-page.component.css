@@ -1,9 +1,10 @@
 .container {
   margin-top: 1rem;
-  display: flex;
   margin: 0 2rem 6rem 2rem;
   flex-wrap: wrap;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .content {
@@ -25,17 +26,20 @@ form {
   flex-basis: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .buttons {
   margin: 2rem;
   width: 35rem;
+  display: flex;
+  justify-content: center;
 }
 
 button {
   color: white;
   background-color: #e72929;
-  width: 100%;
+  width: 200px;
   height: 3rem;
   opacity: 0.8;
   font-size: 1.3rem;
