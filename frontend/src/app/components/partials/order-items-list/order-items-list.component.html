@@ -1,7 +1,16 @@
 <table>
   <tr>
-    <td colspan="5">
-      <h3>Order Items:</h3>
+    <td colspan="2">
+      <h3>Order Items</h3>
+    </td>
+    <td colspan="1">
+      <h3>Price</h3>
+    </td>
+    <td colspan="1" class="tdqntd">
+      <h3>Qntd.</h3>
+    </td>
+    <td colspan="1">
+      <h3>Total Price</h3>
     </td>
   </tr>
   <tr *ngFor="let item of order.items">
@@ -16,7 +25,7 @@
     <td>
       {{ item.food.price | currency:'EUR':'symbol':'1.2-2' }}
     </td>
-    <td>
+    <td class="tdqntd">
       {{ item.quantity }}
     </td>
     <td>
@@ -26,7 +35,7 @@
   <tr>
     <td colspan="3"></td>
     <td>
-      <strong> Total : </strong>
+      <strong> Total Order: </strong>
     </td>
     <td>
       <strong>
