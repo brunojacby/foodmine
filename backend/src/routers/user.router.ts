@@ -66,8 +66,8 @@ router.post(
 );
 
 const generateTokenReponse = (user: User) => {
-  const dadosJWT = {    
-      name: user.name, //id: ""
+  const dadosJWT = { 
+      id: user.id,       
       email: user.email,
       isAdmin: user.isAdmin
   }
